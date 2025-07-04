@@ -47,56 +47,88 @@ class Janela1:
             
             a = str(input('Cadastrar pedido (y-Sim, n-Nao): '))
             
-            if a=='y':
-                print('----------Cadastrar pedido----------\n')
+            if a == 'y':
+                print('\n' + '=' * 40)
+                print(f'{"CADASTRAR NOVO PEDIDO":^40}')
+                print('=' * 40)
                 adicionar = 'y'
                 pedidos = PedidoControler.search_in_pedidos_all(database_name)
-                numero_pedido = len(pedidos)+1
+                numero_pedido = len(pedidos) + 1
+                item_count = 1
                 while adicionar == 'y':
-                    item = int(input('Numero do item: '))
-                    quantidade = int(input('Quantidade: '))
-                    
-                    #calculando em tempo de execução o valor do pedido
-                    a = ItemControler.valor_item(database_name, item)
-                    b = a[0][0]*quantidade
-                    print(b)
-                    valor_total+=b
-                    
-                    for x in range(0,quantidade):#acrescentado o mesmo item várias vezes, de acordo com a quantidade
-                        lista_itens.append((numero_pedido,item))
-                    
-                    adicionar = str(input('Adicionar novo item? (y-Sim, n-Nao): '))
-                
-                print('\n----------Finalizar pedido----------\n')
-                print(f'Numero do pedido: {numero_pedido}')
-                delivery = str(input('Delivery (S/N): ')).lower()
-                if delivery=='s':
-                    delivery = True
-                elif delivery=='n':
-                    delivery = False
-                else:
-                    print('Valor incorreto, recomeçando')
-                    break
-                endereco = str(input('Endereco:'))
-                status_aux = int(input('status: 1-preparo, 2-pronto, 3-entregue: '))
+                    print(f'\nInsira o número do {item_count}º item desejado:')
+                    try:
+                        item = int(input('  > Número do item: '))
+                        quantidade = int(input('  > Quantidade: '))
+                    except ValueError:
+                        print('  [!] Por favor, insira valores numéricos válidos.')
+                        continue
+                    item_count += 1
+
+                    # Calculando o valor do pedido em tempo real
+                    valor_item = ItemControler.valor_item(database_name, item)
+                    if not valor_item or not valor_item[0]:
+                        print('  [!] Item não encontrado. Tente novamente.')
+                        continue
+                    subtotal = valor_item[0][0] * quantidade
+                    print(f'  > Subtotal deste item: R${subtotal:.2f}')
+                    valor_total += subtotal
+
+                    for _ in range(quantidade):
+                        lista_itens.append((numero_pedido, item))
+
+                    adicionar = input('\nAdicionar outro item? (y-Sim, n-Não): ').strip().lower()
+                    while adicionar not in ['y', 'n']:
+                        adicionar = input('  [!] Opção inválida. Digite "y" para Sim ou "n" para Não: ').strip().lower()
+
+                print('\n' + '=' * 40)
+                print(f'{"FINALIZAR PEDIDO":^40}')
+                print('=' * 40)
+                print(f'Número do pedido: {numero_pedido}')
+                print(f'Itens selecionados: {len(lista_itens)}')
+                print(f'Valor parcial do pedido: R${valor_total:.2f}')
+
+                delivery = input('\nO pedido é para delivery? (s-Sim, n-Não): ').strip().lower()
+                while delivery not in ['s', 'n']:
+                    delivery = input('  [!] Opção inválida. Digite "s" para Sim ou "n" para Não: ').strip().lower()
+                delivery_bool = True if delivery == 's' else False
+
+                endereco = ''
+                if delivery_bool:
+                    endereco = input('Informe o endereço de entrega: ').strip()
+                    while not endereco:
+                        endereco = input('  [!] Endereço não pode ser vazio. Informe o endereço de entrega: ').strip()
+
+                print('\nStatus do pedido:')
+                print('  1 - Preparo')
+                print('  2 - Pronto')
+                print('  3 - Entregue')
+                try:
+                    status_aux = int(input('Selecione o status (1/2/3): '))
+                except ValueError:
+                    status_aux = 1
                 if status_aux == 1:
                     status = 'preparo'
-                if status_aux == 2:
+                elif status_aux == 2:
                     status = 'pronto'
                 else:
                     status = 'entregue'
- 
-                print(f'Valor Final: R${valor_total}')
+
+                print('\n' + '-' * 40)
+                print(f'Valor Final do Pedido: R${valor_total:.2f}')
                 data_hoje = date.today()
                 data_formatada = data_hoje.strftime('%d/%m/%Y')
-                print(data_formatada)
-                print(endereco)
-                pedido = Pedido(status, str(delivery), endereco,data_formatada,float(valor_total))
-                PedidoControler.insert_into_pedidos(database_name,pedido)
+                print(f'Data do pedido: {data_formatada}')
+                if delivery_bool:
+                    print(f'Endereço de entrega: {endereco}')
+                print('-' * 40 + '\n')
+
+                pedido = Pedido(status, str(delivery_bool), endereco, data_formatada, float(valor_total))
+                PedidoControler.insert_into_pedidos(database_name, pedido)
                 for elem in lista_itens:
-                    ItemControler.insert_into_itens_pedidos(database_name,elem)
-                
-            elif a=='n':
-                print('Voltando ao Menu inicial')
+                    ItemControler.insert_into_itens_pedidos(database_name, elem)
+
+            elif a == 'n':
+                print('\nVoltando ao Menu inicial...')
                 time.sleep(2)
                 break
