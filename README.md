@@ -37,6 +37,8 @@ Pressione enter e irá aparecer o terminal dentro da IDE rodando o software
 
 Esse software é parte do programa para recrutamento de novos talentos do projeto da Empresa CriandoSonhosLTDA. Consiste em uma sequência de testes de um cenário real, onde um de nossos clientes betas mandou uma série de solicitações para o software de acordo com suas observações e necessidade de uso. Sua tarefa, enquanto desenvolvedor(es) é compreender o que se pede, identificar o tipo de manutenção a ser realizada, implementar a manutenção e rodar o software de forma a mostrar que a sua manutenção solucionou o problema. Muito boa sorte pequenos jedis, que a força esteja com vocês. O prazo para entrega é até: **15/07/25**.
 
+[Nossa Tabela de Manutenção.](https://docs.google.com/document/d/13uxgtOwSM0rnWwkLRF8MLogNE56NusKEaK-wuiej8zQ/edit?usp=sharing)
+
 [Acesse o documento detalhado aqui.](https://docs.google.com/document/d/1ko1jYclh1JraTPVI6uLXApfpHNh2PedjnyXawAxyvYQ/edit?usp=sharing)
 
 [Acesse o caderno virtual Notion com teoria.](https://sleepy-bolt-bee.notion.site/Manuten-o-de-Software-Uma-abordagem-te-rica-e-pr-tica-151674186cac8073bcecff137ef65151)
