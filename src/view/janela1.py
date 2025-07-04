@@ -30,9 +30,17 @@ class Janela1:
         a = 'y'
         
         menu = ItemControler.mostrar_itens_menu(database_name)
-        
-        print('----------Menu----------\n')
-        print(f'{menu} \n')
+
+        print('\n' + '=' * 105)
+        print(f'{"MENU DE ITENS":^105}')
+        print('=' * 105)
+        print(f'| {"Nº":^4} | {"Nome":^22} | {"Tipo":^9} | {"Preço":^9} | {"Descrição":^45} |')
+        print('-' * 105)
+        for item in menu:
+            # Supondo que cada item seja uma tupla: (id, nome, preco, tipo, descricao)
+            print(f'| {item[0]:^4} | {item[1]:<22.22} | {item[3]:<9.9} | R${item[2]:>7.2f} | {item[4]:<45.45} |')
+        print('-' * 105 + '\n')
+
         while a=='y':
             lista_itens = []
             valor_total=0
