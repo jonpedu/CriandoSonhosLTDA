@@ -44,31 +44,45 @@ DatabaseControler.create_table_itens_pedidos(cursor)
 
 
 a = 'y'
-print('''
-                Bem-vindo ao software Pizza Mais
-                        -Criando Sonhos-
-                Estabelecimento: Pizza Ciclano
-                "Seus sonhos tem formato e borda"
-                ---------------------------------
-            ''')
+print("""
+╔════════════════════════════════════════════════════════════╗
+║                   Bem-vindo ao Software                    ║
+║                       Pizza Mais                           ║
+║                  - Criando Sonhos LTDA -                   ║
+╠════════════════════════════════════════════════════════════╣
+║              Estabelecimento: Pizza Ciclano                ║
+║            "Seus sonhos têm formato e borda!"              ║
+╚════════════════════════════════════════════════════════════╝
+""")
 while a == 'y':
-    opcao = str(input('\n1 - Cadastrar\n2 - Pesquisar\n3 - Relatorio\n4 - Inserir Itens Menu\n5 - Encerrar\nDigite: '))
+    print("Selecione uma opção:\n")
+    print("  1 - Cadastrar Pedido")
+    print("  2 - Pesquisar Pedido")
+    print("  3 - Gerar Relatório")
+    print("  4 - Inserir Itens no Menu")
+    print("  5 - Encerrar")
+    opcao = str(input("Digite o número da opção desejada: "))
+
     if opcao == '1':
+        print("\n--- Cadastro de Pedido ---")
         Janela1.mostrar_janela1(database.name)
     if opcao == '2':
+        print("\n--- Pesquisa de Pedido ---")
         Janela2.mostrar_janela2(database.name)
     if opcao == '3':
+        print("\n--- Gerando Relatório ---")
         timestamp_atual = str(time.time())
         dados_relatorio = RelatorioControler.preparar_dados_relatorio(database.name)
-        relatorio = PDF.gerar_pdf(f'Relatorio{timestamp_atual}.pdf', dados_relatorio["pedidos"],dados_relatorio["faturamento_total"])
-        
+        relatorio = PDF.gerar_pdf(f'Relatorio{timestamp_atual}.pdf', dados_relatorio["pedidos"], dados_relatorio["faturamento_total"])
         if relatorio:
             print("Relatório gerado com sucesso em 'Relatorio.pdf'.")
         else:
             print("Erro ao gerar o relatório.")
     if opcao == '4':
+        print("\n--- Inserir Itens no Menu ---")
         print('Nova view')
     if opcao == '5':
+        print("\nEncerrando o sistema. Até logo!")
         a = 'n'
         break
 exit()
