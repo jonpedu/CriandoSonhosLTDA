@@ -59,6 +59,8 @@ class Janela2:
             print('-' * 65)
             print(f'Faturamento total: R$ {faturamento:.2f}\n')
 
+
+        #corrigir logica de atualização de status (mudar dentro do elif de '3' para 3)
         elif q == '3':
             indice = int(input('\nDigite o índice do pedido: '))
             resume = ItemControler.search_into_itens_pedidos_id(database_name, indice)
