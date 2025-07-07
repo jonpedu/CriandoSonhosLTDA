@@ -4,7 +4,7 @@ import time
 from pathlib import Path
 file = Path(__file__).resolve()
 parent, root = file.parent, file.parents[1]
-sys.path.append(str(root))
+sys.path.append(str(root)) # adiciona o caminho do diretório root na lista sys.path. Isso significa que o Python vai procurar módulos para importar também nesse diretório.
 
 #models
 from model.pedido import Pedido
