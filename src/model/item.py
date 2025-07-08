@@ -167,6 +167,29 @@ class Item:
         except OSError as e:
             print(e)
             return 'I6'
+        
+    @staticmethod
+    def delete_item(database_name: str, item_id: int) -> bool:
+        """
+        Exclui um item do banco de dados pelo seu IdItens.
+
+        :param database_name: Nome do banco de dados (string).
+        :param item_id: ID do item a ser excluído (int).
+        :return: True se a exclusão for bem-sucedida, ou código de erro (string).
+        """
+        try:
+            with Database.conect_database(database_name) as conn:
+                cursor = conn.cursor()
+                cursor.execute('DELETE FROM Itens WHERE IdItens = ?;', (item_id,))
+                conn.commit()
+                # Verifica se algum registro foi excluído
+                if cursor.rowcount == 0:
+                    return 'Item não encontrado'
+                return True
+        except OSError as e:
+            print(e)
+            return 'I7'  # Código de erro para exclusão
+
 
 '''
 Códigos de Erro
@@ -177,5 +200,6 @@ insert_into_itens_pedido - I3
 search_into_itens_pedidos_id - I4
 valor_item - I5
 search_item_id - I6
+delete_item - I7
 
 '''
