@@ -8,15 +8,29 @@ file = Path(__file__).resolve()
 parent, root = file.parent, file.parents[1]
 sys.path.append(str(root))
 
-
 from controler.itemControler import ItemControler
 import time
+
+# Janela 3 responsável pela funcionalidade de fazer o cadastro de novos itens no cardapio
 
 class Janela3:
 
     @staticmethod
     def mostrar_janela3(database_name: str) -> None:
 
+        menu = ItemControler.mostrar_itens_menu(database_name)
+
+        # Interface do menu
+        print('\n' + '=' * 105)
+        print(f'{"MENU DE ITENS":^105}')
+        print('=' * 105)
+        print(f'| {"Nº":^4} | {"Nome":^22} | {"Tipo":^9} | {"Preço":^9} | {"Descrição":^45} |')
+        print('-' * 105)
+        for item in menu:
+            print(f'| {item[0]:^4} | {item[1]:<22.22} | {item[3]:<9.9} | R${item[2]:>7.2f} | {item[4]:<45.45} |')
+        print('-' * 105 + '\n')
+
+        # Formulário de cadastro de novos itens
         print("\n" + "="*50)
         print(f"{'CADASTRO DE NOVOS ITENS':^50}")
         print("="*50)

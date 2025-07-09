@@ -34,6 +34,7 @@ class Janela1:
             lista_itens = []
             valor_total=0
             
+            # Formulario para cadastrar novos itens no cardápio
             if a == 'sim':
                 print('\n' + '=' * 40)
                 print(f'{"CADASTRAR NOVO PEDIDO":^40}')
