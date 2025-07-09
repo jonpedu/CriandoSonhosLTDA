@@ -34,16 +34,6 @@ class Janela1:
             lista_itens = []
             valor_total=0
             
-            # Pergunta novamente se quer cadastrar um pedido (podemos remover isso)
-            a = input('Cadastrar pedido (sim/nao/cancelar): ').strip().lower()
-            while a not in ['sim', 'não', 'nao', 'cancelar']:
-                a = input('  [!] Opção inválida. Digite "sim", "não" ou "cancelar": ').strip().lower()
-            
-            if a == 'cancelar':
-                print('\nCancelando cadastro e voltando ao menu principal...')
-                time.sleep(2)
-                break
-            
             if a == 'sim':
                 print('\n' + '=' * 40)
                 print(f'{"CADASTRAR NOVO PEDIDO":^40}')
@@ -163,6 +153,16 @@ class Janela1:
                 PedidoControler.insert_into_pedidos(database_name, pedido)
                 for elem in lista_itens:
                     ItemControler.insert_into_itens_pedidos(database_name, elem)
+            
+            # Pergunta ao usuario se ele quer cadastrar outro pedido
+            a = input('Cadastrar outro pedido (sim/nao/cancelar): ').strip().lower()
+            while a not in ['sim', 'não', 'nao', 'cancelar']:
+                a = input('  [!] Opção inválida. Digite "sim", "não" ou "cancelar": ').strip().lower()
+            
+            if a == 'cancelar':
+                print('\nCancelando cadastro e voltando ao menu principal...')
+                time.sleep(2)
+                break
 
             elif a in ['não', 'nao']:
                 print('\nVoltando ao Menu inicial...')
