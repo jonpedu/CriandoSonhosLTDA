@@ -98,6 +98,7 @@ class Database:
                 Status VARCHAR(30) NOT NULL,
                 Delivery BOLL,
 				Endereco VARCHAR(100),
+                Data TEXT,
                 ValorTotal REAL NOT NULL
                 );
             ''')

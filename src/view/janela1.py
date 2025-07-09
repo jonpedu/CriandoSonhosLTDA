@@ -20,6 +20,7 @@ class Janela1:
         
         menu = ItemControler.mostrar_itens_menu(database_name)
 
+        # Interface do menu
         print('\n' + '=' * 105)
         print(f'{"MENU DE ITENS":^105}')
         print('=' * 105)
@@ -33,6 +34,7 @@ class Janela1:
             lista_itens = []
             valor_total=0
             
+            # Pergunta novamente se quer cadastrar um pedido (podemos remover isso)
             a = input('Cadastrar pedido (sim/nao/cancelar): ').strip().lower()
             while a not in ['sim', 'não', 'nao', 'cancelar']:
                 a = input('  [!] Opção inválida. Digite "sim", "não" ou "cancelar": ').strip().lower()
@@ -62,6 +64,7 @@ class Janela1:
                         print('\nCancelando cadastro e voltando ao menu principal...')
                         time.sleep(2)
                         break
+                    # Primeiro o sistema recebe o numero do item e depois verifica se é numerico, podemos melhorar isso
                     try:
                         item = int(item_input)
                         quantidade = int(quantidade_input)
@@ -99,6 +102,7 @@ class Janela1:
                 print(f'Itens selecionados: {len(lista_itens)}')
                 print(f'Valor parcial do pedido: R${valor_total:.2f}')
 
+                # Informações sobre delivery
                 delivery = input('\nO pedido é para delivery? (sim/nao/cancelar): ').strip().lower()
                 while delivery not in ['sim', 'não', 'nao', 'cancelar']:
                     delivery = input('  [!] Opção inválida. Digite "sim", "não" ou "cancelar": ').strip().lower()
@@ -108,6 +112,7 @@ class Janela1:
                     break
                 delivery_bool = True if delivery == 'sim' else False
 
+                # Informações sobre endereço
                 endereco = ''
                 if delivery_bool:
                     endereco = input('Informe o endereço de entrega (ou "cancelar" para voltar): ').strip()
@@ -123,7 +128,8 @@ class Janela1:
                             break
                     if endereco.lower() == 'cancelar':
                         break
-
+                
+                # Formulário do status do pedido
                 print('\nStatus do pedido:')
                 print('  1 - Preparo')
                 print('  2 - Pronto')
