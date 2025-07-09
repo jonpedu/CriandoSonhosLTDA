@@ -17,6 +17,7 @@ class Janela2:
         print('3 - Atualizar Estado')
         q = int(input('Selecione uma opção: '))
 
+        # Opção para mostrar um pedido em específico
         if q == 1:
             indice = int(input('\nDigite o índice do pedido: '))
             resume = ItemControler.search_into_itens_pedidos_id(database_name, indice)
@@ -34,12 +35,13 @@ class Janela2:
             if len(informacoes_pedido) > 0:
                 print("=== INFORMAÇÕES DO PEDIDO ===")
                 print(f"Status   : {informacoes_pedido[1]}")
-                print(f"Delivery : {informacoes_pedido[2]}")
+                print(f"Delivery : {'Sim' if informacoes_pedido[2] else 'Não'}")
                 print(f"Endereço : {informacoes_pedido[3]}")
                 print(f"Data     : {informacoes_pedido[4]}")
                 print(f"Valor    : R$ {informacoes_pedido[5]:.2f}")
             print('\nVoltando ao menu inicial...\n')
 
+        # Opção para mostrar toda a lista de pedidos
         elif q == 2:
             row = PedidoControler.search_in_pedidos_all(database_name)
             faturamento = 0
@@ -54,7 +56,7 @@ class Janela2:
                     endereco_raw = endereco_raw[0]
                 faturamento += elem.valor_total
                 endereco = endereco_raw or 'Não informado'
-                print(f"{i:<4} {elem.status:<10} {elem.delivery:<10} {endereco:<25} R$ {elem.valor_total:>8.2f}")
+                print(f"{i:<4} {elem.status:<10} {'Sim' if elem.delivery else 'Não':<10} {endereco:<25} R$ {elem.valor_total:>8.2f}")
                 i += 1
             print('-' * 65)
             print(f'Faturamento total: R$ {faturamento:.2f}\n')
