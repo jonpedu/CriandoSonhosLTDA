@@ -23,6 +23,7 @@ class Janela3:
 
         while True:
             try:
+                # Nome do item
                 nome = input("Nome do item (obrigatório) ou 'cancelar' para sair: ").strip()
                 if nome.lower() == 'cancelar':
                     print("Cadastro cancelado. Voltando ao menu principal...")
@@ -32,12 +33,22 @@ class Janela3:
                     print("[!] O nome é obrigatório. Tente novamente.")
                     continue
 
-                descricao = input("Descrição do item ou 'cancelar' para sair: ").strip()
-                if descricao.lower() == 'cancelar':
+                # Tipo do item (Tipo do item)
+                categorias = ["Pizza", "Bebida", "Sobremesa", "Outro"]
+                print("Tipo (digite o número correspondente) ou 'cancelar' para sair:")
+                for i, cat in enumerate(categorias, start=1):
+                    print(f" {i} - {cat}")
+                cat_choice = input("Tipo: ").strip()
+                if cat_choice.lower() == 'cancelar':
                     print("Cadastro cancelado. Voltando ao menu principal...")
                     time.sleep(1)
                     break
 
+                if cat_choice not in ['1', '2', '3', '4']:
+                    print("[!] Tipo inválido. Tente novamente.")
+                    continue
+
+                # Preço do item
                 preco_str = input("Preço (obrigatório, número positivo) ou 'cancelar' para sair: ").strip()
                 if preco_str.lower() == 'cancelar':
                     print("Cadastro cancelado. Voltando ao menu principal...")
@@ -52,19 +63,12 @@ class Janela3:
                     print("[!] Preço inválido. Digite um número válido.")
                     continue
 
-                categorias = ["Pizza", "Bebida", "Sobremesa", "Outro"]
-                print("Categoria (digite o número correspondente) ou 'cancelar' para sair:")
-                for i, cat in enumerate(categorias, start=1):
-                    print(f" {i} - {cat}")
-                cat_choice = input("Categoria: ").strip()
-                if cat_choice.lower() == 'cancelar':
+                # Descrição do item
+                descricao = input("Descrição do item ou 'cancelar' para sair: ").strip()
+                if descricao.lower() == 'cancelar':
                     print("Cadastro cancelado. Voltando ao menu principal...")
                     time.sleep(1)
                     break
-
-                if cat_choice not in ['1', '2', '3', '4']:
-                    print("[!] Categoria inválida. Tente novamente.")
-                    continue
 
                 categoria = categorias[int(cat_choice)-1]
 
