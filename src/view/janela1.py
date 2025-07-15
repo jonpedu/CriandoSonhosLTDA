@@ -55,6 +55,7 @@ class Janela1:
                     if quantidade_input == 'cancelar':
                         print('\nCancelando cadastro e voltando ao menu principal...')
                         time.sleep(2)
+                        adicionar = 'cancelar'
                         break
                     # Primeiro o sistema recebe o numero do item e depois verifica se é numerico, podemos melhorar isso
                     try:
