@@ -49,6 +49,7 @@ class Janela1:
                     if item_input == 'cancelar':
                         print('\nCancelando cadastro e voltando ao menu principal...')
                         time.sleep(2)
+                        adicionar = 'cancelar'
                         break
                     quantidade_input = input('  > Quantidade (ou "cancelar" para voltar): ').strip().lower()
                     if quantidade_input == 'cancelar':
