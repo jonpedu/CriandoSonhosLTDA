@@ -1,4 +1,4 @@
-#Necessário para realizar import em python
+# Necessário para realizar import em python
 import sys
 from pathlib import Path
 file = Path(__file__).resolve()
@@ -23,6 +23,7 @@ class Janela2:
             resume = ItemControler.search_into_itens_pedidos_id(database_name, indice)
             informacoes_pedido = PedidoControler.search_in_pedidos_id(database_name, indice)[0]
             quantidade_itens = len(resume)
+
             print(f'\n===== RESUMO DO PEDIDO Nº {indice} =====')
             print('-' * 40)
             for elem in resume:
@@ -32,6 +33,7 @@ class Janela2:
                 print(f"Valor     : R$ {elem[1]:.2f}")
                 print('-' * 40)
             print(f"Total de itens: {quantidade_itens}\n")
+
             if len(informacoes_pedido) > 0:
                 print("=== INFORMAÇÕES DO PEDIDO ===")
                 print(f"Status   : {informacoes_pedido[1]}")
@@ -61,14 +63,15 @@ class Janela2:
             print('-' * 65)
             print(f'Faturamento total: R$ {faturamento:.2f}\n')
 
-
-        #corrigir logica de atualização de status (mudar dentro do elif de '3' para 3)
-        elif q == '3':
+        # Opção para atualizar o status do pedido
+        elif q == 3:
             indice = int(input('\nDigite o índice do pedido: '))
             resume = ItemControler.search_into_itens_pedidos_id(database_name, indice)
             quantidade_itens = len(resume)
+
             if quantidade_itens > 0:
                 informacoes_pedido = PedidoControler.search_in_pedidos_id(database_name, indice)[0]
+
                 print(f'\n===== RESUMO DO PEDIDO Nº {indice} =====')
                 print('-' * 40)
                 for elem in resume:
@@ -80,25 +83,27 @@ class Janela2:
                 print(f"Total de itens: {quantidade_itens}\n")
                 print("=== INFORMAÇÕES DO PEDIDO ===")
                 print(f"Status   : {informacoes_pedido[1]}")
-                print(f"Delivery : {informacoes_pedido[2]}")
+                print(f"Delivery : {'Sim' if informacoes_pedido[2] else 'Não'}")
                 print(f"Endereço : {informacoes_pedido[3]}")
                 print(f"Data     : {informacoes_pedido[4]}")
                 print(f"Valor    : R$ {informacoes_pedido[5]:.2f}")
+
                 print('\nAtualize o status do pedido:')
                 print('1 - Preparo')
                 print('2 - Pronto')
                 print('3 - Entregue')
                 novo_status = int(input('Digite o novo status: '))
-                if novo_status / novo_status != 1:
+
+                if novo_status not in [1, 2, 3]:
                     print('\nEntrada inválida, retornando...\n')
                 else:
                     result = PedidoControler.update_pedido_status_id(database_name, indice, novo_status)
-                    
                     if result:
                         print(f'\nStatus do Pedido {indice} atualizado com sucesso!')
                     else:
                         print('\nErro ao atualizar.')
             else:
                 print('\nÍndice inválido.')
+
         else:
             print('\nEntrada inválida, retornando...\n')
