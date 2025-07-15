@@ -19,7 +19,8 @@ from controler.relatorioController import RelatorioControler
 # views
 from view.janela1 import Janela1
 from view.janela2 import Janela2
-from view.janela3 import Janela3  
+from view.janela3 import Janela3
+from view.janela4 import Janela4  
 
 # report
 from report.relatorio1 import PDF
@@ -84,18 +85,7 @@ while a == 'y':
     elif opcao == '4':
         Janela3.mostrar_janela3(database.name)
     elif opcao == '5':
-        print("\n--- Excluir Item do Menu ---")
-        
-        try:
-            id_str = input("Digite o ID do item que deseja excluir: ").strip()
-            item_id = int(id_str)
-            resultado = ItemControler.delete_item(database.name, item_id)
-            if resultado == True:
-                print(f"Item com ID {item_id} excluído com sucesso!")
-            else:
-                print(f"Erro ao excluir item: {resultado}")
-        except ValueError:
-            print("ID inválido. Digite um número inteiro válido.")
+        Janela4.mostrar_janela4(database.name)
     elif opcao == '6':
         print("\n-------------------------------------")
         print("  Obrigado por usar nosso sistema!  ")
